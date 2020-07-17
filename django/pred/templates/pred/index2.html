@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Bootstrap core CSS -->
+  {%load static%}
+
+  <link href='{% static "pred/vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>나의 견상은?</title>
+
+  <!-- Custom fonts for this template-->
+  <link href='{% static "pred/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dokdo|Nanum+Pen+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{% static 'pred/css/sb-admin-2.css' %}" rel="stylesheet">
+  <style>
+        * {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    }
+    html {
+    height: 100%;
+    }
+    body {
+    margin: 0;
+    height: 100%;
+    }
+    .wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 15em; /* footer height */
+    }
+
+    footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    }
+
+    .card {
+      position: relative;
+      top: -4%;
+      margin-left: 1em;
+    }
+    .imgdiv{
+      text-align: center;
+      width: 49.5%;
+      display: inline-block;
+      min-width: 17em;
+    }
+    .imgdiv > img {
+      max-width: 80%;
+      max-height: 22em;
+      /* height: 20em; */
+    }
+    .css-progressbar { width: 80%; animation: progressbar 3s ease-out; }
+    @keyframes progressbar { 
+      0% { width: 0%; } 100% { }
+    }
+    .descript .card-body{
+      font-family: 'Nanum Pen Script', cursive;
+      font-size:1.5em;
+      color:black;
+    } 
+
+  </style>
+</head>
+
+<body id="page-top">
+
+<div class="wrap">
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+  </ul>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content"> 
+      <!-- <div id="content" style="min-height: 35em;"> -->
+
+      <!-- Topbar -->
+      <!-- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"> -->
+
+      <!-- Sidebar Toggle (Topbar) -->
+      <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+      </button>
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="align-items-center justify-content-between mb-4" style="text-align: center;">
+          <h1 class="h3 mb-0 bg" style="font-family: 'Indie Flower', cursive;font-size: 3.5em;">Doggie Face</h1>
+            <br>
+        </div>
+
+        <!-- Content Row -->
+
+        <div class="row" style="justify-content: center;">
+
+          <!-- Area Chart -->
+          <div style="position: relative;width:70%;min-width: 20em;" max-width:103% !important>
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header  d-flex flex-row align-items-center"
+                style="margin-bottom: 5px;padding-bottom: 5px;overflow: hidden;">
+
+                <h4 class="m-0 font-weight-bold text-primary" style="font-family: 'Indie Flower', cursive;">Choose the picture</h4>
+                <form method="POST" action="{% url 'index' %}" enctype="multipart/form-data" class="form-horizontal"
+                  style="margin-top:5px;">
+                  {% csrf_token %}
+                  <div class="form-group" style="margin: 0;padding-left: 1.4em;">
+                    <div class="" style="display: inline-block;">
+                      <a href="#page-bottom">
+                        <button type="submit" class="btn btn-primary">분석</button>
+                      </a>
+                    </div>
+                    
+                    <div class="" style="display: inline-block;">{{form.as_p}}</div>
+                    
+                  </div>
+                </form>
+
+                <div class="dropdown no-arrow">
+                  <!-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                  </a> -->
+                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Dropdown Header:</div>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+
+                <div class="image">
+                  {% if result_img == "" %}
+                  <div style="text-align:center;">
+                   <img src="/static/pred/img/pngwing.com.png" style="max-width:30%;max-height:30%;" />
+                  </div>
+                  {%else%}
+                  <div class="imgdiv" style="justify-content: center;">
+                  <img src="data:image/png;base64,{{result_img}}"/>
+                  </div>
+                  <div class="imgdiv" style="justify-content: center;">
+                  <img src="/static/pred/img/골든리트리버.png" style="display:{{dis.1}};" />
+                  <img src="/static/pred/img/진돗개.png" style="display:{{dis.2}};" />
+                  <img src="/static/pred/img/푸들.png" style="display:{{dis.3}};" />
+                  <img src="/static/pred/img/불독.jpg" style="display:{{dis.4}};" />
+                  <img src="/static/pred/img/시츄.png" style="display:{{dis.5}};" />
+                  <img src="/static/pred/img/치와와.png" style="display:{{dis.6}};" />
+                  <img src="/static/pred/img/비글.png" style="display:{{dis.7}};" />
+                  </div>
+                  {% endif %}
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row" style="justify-content: center;">
+
+          <!-- Content Column -->
+          <!-- <div class="col-lg-6 mb-4"> -->
+
+          <!-- Project Card Example -->
+          {% if result_name != "" %}
+          <div class="card shadow mb-4" style="width: 44%; min-width: 20em;">
+            <div class="card-header py-3">
+              <h5 class="m-0 font-weight-bold text-primary">result</h5>
+            </div>
+
+            <div class="card-body">              
+              {% if percent.1 > 10 %}
+              <h4 class="small font-weight-bold">{{result_list.1.0}}<span
+                  class="float-right ">{{result_list.1.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-danger css-progressbar" role="progressbar" style="width: {{result_list.1.1}}%"
+                  aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.2 > 10 %}
+              <h4 class="small font-weight-bold">{{result_list.2.0}} <span
+                  class="float-right">{{result_list.2.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-warning css-progressbar" role="progressbar" style="width: {{result_list.2.1}}%; animation:progressbar 2s ease-out;"
+                  aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.3 > 10 %}
+              <h4 class="small font-weight-bold">{{result_list.3.0}} <span
+                  class="float-right">{{result_list.3.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-success css-progressbar" role="progressbar" style="width: {{result_list.3.1}}%"
+                  aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.4 > 10 %}
+              <h4 class="small font-weight-bold">{{result_list.4.0}} <span
+                  class="float-right">{{result_list.4.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-info css-progressbar" role="progressbar" style="width: {{result_list.4.1}}%"
+                  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.5 > 10 %}
+              <h4 class="small font-weight-bold">{{result_list.5.0}} <span
+                  class="float-right">{{result_list.5.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar css-progressbar" role="progressbar" style="width: {{result_list.5.1}}%" aria-valuenow="72"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.6 > 10 %}
+              <h4 class="small font-weight-bold">{{result_list.6.0}} <span
+                  class="float-right">{{result_list.6.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar css-progressbar" role="progressbar" style="background-color: blueviolet; width: {{result_list.6.1}}%;"
+                  aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.7 > 10 %}
+              <h4 class="small font-weight-bold">{{result_list.7.0}} <span
+                  class="float-right">{{result_list.7.1}}%</span>
+              </h4>
+              <div class="progress">
+                <div class="progress-bar bg-dark css-progressbar" role="progressbar" style="width: {{result_list.7.1}}%"
+                  aria-valuenow="96" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+
+
+          <div class="descript" style="width: 25%;min-width: 20em;">
+            ​
+            <!-- Approach -->
+            <div class="card shadow mb-4" style="display:{{dis.1}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">골든리트리버</h6>
+              </div>
+              <div class="card-body">
+                <p>골든리트리버를 닮은 당신 건실하고 자신감이 있어보이는 얼굴을 하고 있군요!
+                  친밀하며 믿음이 있고 애정이 깊으며 확실한 성품을 가진 당신! 그러나
+                  다양한 질병 관절염, 비만, 지루성피부염, 음식알레르기, 탈모증 등 다양한 질병을 조심하세요!</p>
+              </div>
+            </div>
+            <!-- Approach -->
+            <div class="card shadow mb-4" style="display:{{dis.2}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">진돗개</h6>
+              </div>
+              <div class="card-body">
+                <p>진돗개를 닮은 당신 역삼각형의 머리와 듬직한 어깨를 하고 있겠군요!
+                  </p>
+                  <p>대담하고 용감하며 신중하고 맹렬한 성격을 가진 당신! 한국의 토종견으로
+                    아름답기는 당신의 용모가 베스트!</p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.3}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">푸들</h6>
+              </div>
+              <div class="card-body">
+                <p>푸들을 닮은 당신 깜찍한 외모를 가지고 있어 많은 사람들에게 사랑을 받겠군요!
+                  지혜롭고 영리하지만 가끔은 새침떼기 처럼 앙탈을 부리는 귀여운 성격!
+                  그러나 귓속에 털이 많이 귓병에 조심하세요!</p>
+
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.4}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">불독</h6>
+              </div>
+              <div class="card-body">
+                <p>불독을 닮은 당신 짧은 다리와 높게 위치한 코, 윗턱보다 아랫턱이 나온 모습으로
+                  상대방에게 위협적인 모습을 자주 보이겠군요! 평소에는 부드럽고 온순하나 화가나면
+                  만만치 않은 성격! 그러나 안구탈출이나 백내장을 조심하세요!</p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.5}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">시츄</h6>
+              </div>
+              <div class="card-body">
+                <p>시츄를 닮은 당신 순한 모습을 하고 뚱한 얼굴이 매력적이겠군요!
+                  사교적이며 치근하고 영리하여 가끔 고집을 부리기도 하는 당신!
+                  외이염이나 신장염에 주의하세요!
+                </p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.6}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">치와와</h6>
+              </div>
+              <div class="card-body">
+                <p>치와와를 닮은 당신 쾌활한 표정에 다부지며 재빠른 움직임을 가지고 있겠군요!
+                  기민하고 용감하며 호기심이 강하지만 골절이나 지루성 피부염 충치를 조심하세요!</p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.7}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">비글</h6>
+              </div>
+              <div class="card-body">
+                <p>비글을 닮은 당신 눈을 치켜뜨고 매력적으로 쳐다보는 모습이 인상적이겠군요!
+                  느근한 성질을 가지고 있으며, 쾌활하고 명랑한 응석꾸러기 같은 성품 뒤에
+                  악마같은 성격을 하고 있는 당신! 외이염이나 백내장, 비만 간질을 조심하세요!</p>
+              </div>
+            </div>
+
+          </div>
+          <!-- </div> -->
+
+        </div>
+        {% endif %}
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="page-bottom"></div>
+
+  <!-- Footer -->
+<footer class="page-footer font-small cyan darken-3" style="background: #2f2f2f;color: whitesmoke;">
+  <div class="row" style="padding:1.5em 0;margin:0">
+
+    <div style="padding:0.5em 0;margin:auto;text-align: center;"class=" mb-lg-0">
+      <h5 class="text-uppercase">Location</h5>
+      <p style="margin:0">
+        서울특별시 강남구 역삼동 태헤란로 멀티캠퍼스
+      </p>
+    </div>
+    <div style="padding:0.5em 0;margin:auto;text-align: center;" class=" mb-lg-0">
+      <h5 class="text-uppercase ">Creator</h5>
+      <p style="margin:0">
+        강규현 김광현 김희준 정찬오 조민재
+      </p>
+    </div>
+  </div>
+  <!-- Copyright -->
+  <div style="background: #202021; color:whitesmoke;" class="footer-copyright text-center py-3">Copyright © MDBootstrap.com 2020 </div>
+  <!-- Copyright -->
+</footer>
+</div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/static/pred/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/pred/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/static/pred/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/static/pred/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/static/pred/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/static/pred/js/demo/chart-area-demo.js"></script>
+  <script src="/static/pred/js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Bootstrap core CSS -->
+  {%load static%}
+
+  <link href='{% static "pred/vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>나의 견상은?</title>
+
+  <!-- Custom fonts for this template-->
+  <link href='{% static "pred/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{% static 'pred/css/sb-admin-2.min.css' %}" rel="stylesheet">
+  <style>
+    .card {
+      position: relative;
+      top: -4%;
+      margin-left: 10px;
+    }
+    .imgdiv{
+      text-align: center;
+      width: 49.5%;
+      display: inline-block;
+    }
+    .imgdiv > img {
+      max-width: 70%;
+      max-height: 20em;
+    }
+  </style>
+</head>
+
+<body id="page-top">
+
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+  </ul>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      <!-- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"> -->
+
+      <!-- Sidebar Toggle (Topbar) -->
+      <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+      </button>
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="align-items-center justify-content-between mb-4" style="text-align: center;">
+          <h1 class="h3 mb-0 text-gray-800">The Dog having your face</h1>
+            <br>
+        </div>
+
+        <!-- Content Row -->
+
+        <div class="row" style="justify-content: center;">
+
+          <!-- Area Chart -->
+          <div style="position: relative;width:80%" max-width:103% !important>
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header  d-flex flex-row align-items-center justify-content-between"
+                style="margin-bottom: 5px;padding-bottom: 5px;">
+
+                <h4 class="m-0 font-weight-bold text-primary">Choose the picture</h4>
+                <form method="POST" action="{% url 'index' %}" enctype="multipart/form-data" class="form-horizontal"
+                  style="margin-top:5px">
+                  {% csrf_token %}
+                  <div class="form-group" style="margin: 0;">
+                    <div class="" style="display: inline-block;">{{form.as_p}}</div>
+                    <div class="" style="display: inline-block;">
+                      <button type="submit" class="btn btn-primary">분석</button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="dropdown no-arrow">
+                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Dropdown Header:</div>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                
+                <!-- <div class="chart-area">
+                  </div> -->
+<!-- 
+                <div class="image">
+                  {% if result_img != "" %}
+                  <img src="data:image/png;base64,{{result_img}}" style="max-width:30%;max-height:30%;" />
+                  {% endif %}
+                </div> -->
+                <!-- 사람 얼굴이나 강아지 사진 -->
+                <div class="image">
+                  {% if result_img == "" %}
+                  <img src="/static/pred/img/pngwing.com.png" style="max-width:30%;max-height:30%;" />
+                  
+                  {%else%}
+                  <div class="imgdiv" style="justify-content: center;">
+                  <img src="data:image/png;base64,{{result_img}}"/>
+                  </div>
+                  <div class="imgdiv" style="justify-content: center;">
+                  <img src="/static/pred/img/골든리트리버.png" style="display:{{dis.1}};" />
+                  <img src="/static/pred/img/진돗개.png" style="display:{{dis.2}};" />
+                  <img src="/static/pred/img/푸들.png" style="display:{{dis.3}};" />
+                  <img src="/static/pred/img/불독.jpg" style="display:{{dis.4}};" />
+                  <img src="/static/pred/img/시츄.png" style="display:{{dis.5}};" />
+                  <img src="/static/pred/img/치와와.png" style="display:{{dis.6}};" />
+                  <img src="/static/pred/img/비글.png" style="display:{{dis.7}};" />
+                  </div>
+                  {% endif %}
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row" style="justify-content: center;">
+
+          <!-- Content Column -->
+          <!-- <div class="col-lg-6 mb-4"> -->
+
+          <!-- Project Card Example -->
+          <div class="card shadow mb-4" style="width: 50%;">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">결과</h6>
+            </div>
+
+
+
+            <div class="card-body">
+              
+              {% if percent.1 != 0 %}
+              <h4 class="small font-weight-bold">{{result_list.1.0}}<span
+                  class="float-right">{{result_list.1.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{result_list.1.1}}%"
+                  aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.2 != 0 %}
+              <h4 class="small font-weight-bold">{{result_list.2.0}} <span
+                  class="float-right">{{result_list.2.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: {{result_list.2.1}}%"
+                  aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.3 != 0 %}
+              <h4 class="small font-weight-bold">{{result_list.3.0}} <span
+                  class="float-right">{{result_list.3.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{result_list.3.1}}%"
+                  aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.4 != 0 %}
+              <h4 class="small font-weight-bold">{{result_list.4.0}} <span
+                  class="float-right">{{result_list.4.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-info" role="progressbar" style="width: {{result_list.4.1}}%"
+                  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.5 != 0 %}
+              <h4 class="small font-weight-bold">{{result_list.5.0}} <span
+                  class="float-right">{{result_list.5.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar " role="progressbar" style="width: {{result_list.5.1}}%" aria-valuenow="72"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.6 != 0 %}
+              <h4 class="small font-weight-bold">{{result_list.6.0}} <span
+                  class="float-right">{{result_list.6.1}}%</span>
+              </h4>
+              <div class="progress mb-4">
+                <div class="progress-bar" role="progressbar" style="background-color: blueviolet; width: {{result_list.6.1}}%;"
+                  aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+              {% if percent.7 != 0 %}
+              <h4 class="small font-weight-bold">{{result_list.7.0}} <span
+                  class="float-right">{{result_list.7.1}}%</span>
+              </h4>
+              <div class="progress">
+                <div class="progress-bar bg-dark" role="progressbar" style="width: {{result_list.7.1}}%"
+                  aria-valuenow="96" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+
+
+          <div style="width: 30%">
+            ​
+            <!-- Approach -->
+            <div class="card shadow mb-4" style="display:{{dis.1}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">골든리트리버</h6>
+              </div>
+              <div class="card-body">
+                <p>골든리트리버를 닮은 당신 건실하고 자신감이 있어보이는 얼굴을 하고 있군요!
+                  친밀하며 믿음이 있고 애정이 깊으며 확실한 성품을 가진 당신! 그러나
+                  다양한 질병 관절염, 비만, 지루성피부염, 음식알레르기, 탈모증 등 다양한 질병을 조심하세요!</p>
+              </div>
+            </div>
+            <!-- Approach -->
+            <div class="card shadow mb-4" style="display:{{dis.2}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">진돗개</h6>
+              </div>
+              <div class="card-body">
+                <p>진돗개를 닮은 당신 역삼각형의 머리와 듬직한 어깨를 하고 있겠군요!
+                  대담하고 용감하며 신중하고 맹렬한 성격을 가진 당신! 한국의 토종견으로
+                  아름답기는 당신의 용모가 베스트!</p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.3}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">푸들</h6>
+              </div>
+              <div class="card-body">
+                <p>푸들을 닮은 당신 깜찍한 외모를 가지고 있어 많은 사람들에게 사랑을 받겠군요!
+                  지혜롭고 영리하지만 가끔은 새침떼기 처럼 앙탈을 부리는 귀여운 성격!
+                  그러나 귓속에 털이 많이 귓병에 조심하세요!</p>
+
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.4}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">불독</h6>
+              </div>
+              <div class="card-body">
+                <p>불독을 닮은 당신 짧은 다리와 높게 위치한 코, 윗턱보다 아랫턱이 나온 모습으로
+                  상대방에게 위협적인 모습을 자주 보이겠군요! 평소에는 부드럽고 온순하나 화가나면
+                  만만치 않은 성격! 그러나 안구탈출이나 백내장을 조심하세요!</p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.5}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">시츄</h6>
+              </div>
+              <div class="card-body">
+                <p>시츄를 닮은 당신 순한 모습을 하고 뚱한 얼굴이 매력적이겠군요!
+                  사교적이며 치근하고 영리하여 가끔 고집을 부리기도 하는 당신!
+                  외이염이나 신장염에 주의하세요!
+                </p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.6}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">치와와</h6>
+              </div>
+              <div class="card-body">
+                <p>치와와를 닮은 당신 쾌활한 표정에 다부지며 재빠른 움직임을 가지고 있겠군요!
+                  기민하고 용감하며 호기심이 강하지만 골절이나 지루성 피부염 충치를 조심하세요!</p>
+              </div>
+            </div>
+            <div class="card shadow mb-4" style="display:{{dis.7}};">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">비글</h6>
+              </div>
+              <div class="card-body">
+                <p>비글을 닮은 당신 눈을 치켜뜨고 매력적으로 쳐다보는 모습이 인상적이겠군요!
+                  느근한 성질을 가지고 있으며, 쾌활하고 명랑한 응석꾸러기 같은 성품 뒤에
+                  악마같은 성격을 하고 있는 당신! 외이염이나 백내장, 비만 간질을 조심하세요!</p>
+              </div>
+            </div>
+
+          </div>
+          <!-- </div> -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/static/pred/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/pred/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/static/pred/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/static/pred/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/static/pred/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/static/pred/js/demo/chart-area-demo.js"></script>
+  <script src="/static/pred/js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
