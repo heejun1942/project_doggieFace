@@ -143,7 +143,7 @@ def main():
     # TO-DO
     name_images = load_name_images(IMAGE_PATH_PATTERN)
 
-    # 이미지별로 얼굴인식 ->2명의 연예인 200개
+    # 이미지별로 얼굴인식 
     for name_image in name_images:
         file_path = os.path.join(OUTPUT_IMAGE_DIR,f"{name_image[0]}")
         image = name_image[1]#실제 image 파일 

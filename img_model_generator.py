@@ -116,35 +116,6 @@ def main():
     print("y_test.shape:", y_test.shape)
 
     # # 모델 정의
-    # model = Sequential()
-    # # Input + CNN-1
-    # model.add(Conv2D(
-    #     input_shape=(64, 64, 3),
-    #     filters=32,
-    #     kernel_size=(3, 3),
-    #     strides=(1, 1),
-    #     padding="same",
-    #     activation="relu"
-    # ))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
-    # # CNN-2
-    # model.add(Conv2D(filters=32, kernel_size=(3, 3), strides=(1, 1), padding="same", activation="relu"
-    # ))
-    # model.add(MaxPooling2D(pool_size=(2,2)))
-    # model.add(Dropout(0.01))
-    # # CNN-3
-    # model.add(Conv2D(filters=64, kernel_size=(3, 3), strides=(1, 1), padding="same", activation="relu"
-    # ))
-    # model.add(MaxPooling2D(pool_size=(2,2)))
-    # model.add(Dropout(0.05))
-
-    # # Flatten + Dense
-    # model.add(Flatten())     
-    # model.add(Dense(512, activation='relu'))
-    # model.add(Dense(128, activation='relu'))
-    # model.add(Dense(num_classes, activation='softmax'))
-
-    # model.summary()
     model = Sequential()
     # Input + CNN-1
     model.add(Conv2D(
